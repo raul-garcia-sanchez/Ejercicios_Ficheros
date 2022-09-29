@@ -13,23 +13,14 @@
 
     echo "<h1>PROCESA CONTACTES</h1>";
     $contactes = file("contactes31.txt");
-    $stringAEscribir = "";
+    $file = fopen("comanda31b.txt","a");
     echo "<ul>";
     foreach($contactes as $personal){
         echo "<li>$personal</li>";
+        $contact = str_replace(",","#",$personal);
+        fwrite($file, $contact);
     }
-
     echo "</ul>";
-    foreach($contactes as $contacte){
-        $arrayContacte = explode(",",$contacte);
-        foreach($arrayContacte as $cont){
-            $stringAEscribir .= $cont."#";
-            
-        }
-    }
-    
-    $file = fopen("comanda31b.txt","a");
-    fwrite($file, $stringAEscribir);
     fwrite($file,"\n");
     fclose($file);
 
